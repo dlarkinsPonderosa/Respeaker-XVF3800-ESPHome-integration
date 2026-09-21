@@ -186,7 +186,7 @@ micro_wake_word:
       id: stop
       internal: true
     # "Snooze" - enabled only while a timer is ringing (see timers-alarm.yaml)
-    - model: https://raw.githubusercontent.com/dlarkinsPonderosa/Respeaker-XVF3800-ESPHome-integration/refs/heads/snooze-wake-word/microwakeword/models/snooze.json
+    - model: https://raw.githubusercontent.com/formatBCE/Respeaker-XVF3800-ESPHome-integration/refs/heads/main/microwakeword/models/snooze.json
       id: snooze
       internal: true
   vad:
