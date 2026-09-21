@@ -212,6 +212,8 @@ micro_wake_word:
                       switch.is_on: timer_ringing
                     then:
                       - switch.turn_off: timer_ringing
+                      # A pending snooze is cancelled too - "Stop" means stop
+                      - script.stop: snooze_timer
                     # Otherwise stop the voice assistant if running
                     else:
                       - if:
@@ -230,8 +232,9 @@ micro_wake_word:
                                       announcement: true
                                       id: external_media_player
 
-          # "Snooze": silence the ring without cancelling anything else.
-          # HA re-arms the timer off the esphome.wake_word_detected event.
+          # "Snooze": silence the ring, then ring again after snooze_minutes.
+          # No guard on snooze_enabled is needed - when that switch is off the
+          # model is never enabled, so this phrase cannot fire.
           - if:
               condition:
                 lambda: 'return wake_word == "Snooze";'
@@ -241,6 +244,7 @@ micro_wake_word:
                       switch.is_on: timer_ringing
                     then:
                       - switch.turn_off: timer_ringing
+                      - script.execute: snooze_timer
 
           # Any other wake word: the normal assist path. A ringing timer no
           # longer swallows the detection - that is what "Stop" is for.
