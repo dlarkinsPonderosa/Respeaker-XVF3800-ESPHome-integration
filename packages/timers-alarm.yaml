@@ -69,6 +69,8 @@ switch:
     on_turn_off:
       # Disable stop wake word
       - micro_wake_word.disable_model: stop
+      # Disable snooze wake word
+      - micro_wake_word.disable_model: snooze
       - script.execute: disable_repeat
       # Stop any current announcement (ie: stop the timer ring mid playback)
       - if:
@@ -94,6 +96,8 @@ switch:
           duration: 0.0s
       # Enable stop wake word
       - micro_wake_word.enable_model: stop
+      # Enable snooze wake word
+      - micro_wake_word.enable_model: snooze
       # Ring timer
       - script.execute: ring_timer
       # Refresh LED
