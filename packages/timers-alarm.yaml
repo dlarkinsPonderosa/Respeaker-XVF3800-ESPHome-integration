@@ -117,14 +117,13 @@ switch:
     icon: mdi:bell-badge
     name: "Alarm on"
 
-  # Defines if alarm is active
+  # Defines if snooze is active
   - platform: template
     id: snooze_enabled
     name: "Snooze enabled"
     icon: mdi:alarm-snooze
     optimistic: true
     restore_mode: RESTORE_DEFAULT_ON
-    entity_category: config
     on_turn_off:
       - script.stop: snooze_timer
 
@@ -143,7 +142,6 @@ number:
     step: 1
     unit_of_measurement: min
     mode: box
-    entity_category: config
 
 binary_sensor:
   # Gives HA visibility of a snooze that is counting down, since no HA-side
