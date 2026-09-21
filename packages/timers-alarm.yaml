@@ -57,8 +57,9 @@ datetime:
     internal: false
     set_action:
       then:
+        # Setting a new time abandons the old alarm, so abandon its snooze too.
+        - script.stop: snooze_timer
         - switch.turn_on: alarm_on
-
 switch:
   # Internal switch to track when a timer is ringing on the device.
   - platform: template
@@ -116,7 +117,10 @@ switch:
     id: alarm_on
     icon: mdi:bell-badge
     name: "Alarm on"
-
+    # Cancelling the alarm cancels any snooze counting down for it.
+    on_turn_off:
+      - script.stop: snooze_timer
+      
   # Defines if snooze is active
   - platform: template
     id: snooze_enabled
