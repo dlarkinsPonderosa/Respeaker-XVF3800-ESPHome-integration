@@ -194,10 +194,10 @@ select:
 
 script:
   - id: snooze_timer
-  mode: restart
-  then:
-    - delay: !lambda return (uint32_t) (id(snooze_minutes).state * 60000);
-    - switch.turn_on: timer_ringing
+    mode: restart
+    then:
+      - delay: !lambda return (uint32_t) (id(snooze_minutes).state * 60000);
+      - switch.turn_on: timer_ringing
     
   # Script executed when the timer is ringing, to playback sounds.
   - id: ring_timer
